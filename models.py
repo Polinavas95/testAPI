@@ -12,7 +12,6 @@ class Item(models.Model):
 	date = fields.DateField(auto_now=True)
 
 	async def save(self, *args, **kwargs) -> None:
-		self.rate = 12.5
 		await super().save(*args, **kwargs)
 
 	class PydanticMeta:
