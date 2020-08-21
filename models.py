@@ -7,9 +7,9 @@ class Item(models.Model):
 	"""A model of items
 	"""
 	id = fields.IntField(pk=True)
+	date = fields.DateField(auto_now=True)
 	cargo_type = fields.TextField()
 	rate = fields.FloatField()
-	date = fields.DateField(auto_now=True)
 
 	async def save(self, *args, **kwargs) -> None:
 		await super().save(*args, **kwargs)
