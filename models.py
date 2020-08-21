@@ -1,14 +1,12 @@
-from datetime import datetime
-
 from tortoise import models, fields
-from tortoise.contrib.pydantic import pydantic_model_creator, pydantic_queryset_creator
+from tortoise.contrib.pydantic import pydantic_model_creator
 
 
 
 class Item(models.Model):
 	"""A model of items
 	"""
-	id = fields.ForeignKeyField(models.Date, related_name='items')
+	id = fields.IntField(pk=True)
 	cargo_type = fields.TextField()
 	rate = fields.FloatField()
 	date = fields.DateField(auto_now=True)

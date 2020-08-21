@@ -1,11 +1,9 @@
 from typing import List
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
-from .models import Item, ItemPydantic, ItemInPydantic
+from models import Item, ItemPydantic, ItemInPydantic
 
 app = FastAPI()
-
-
 
 @app.post('/items', response_model=ItemPydantic)
 async def create_rate(item: ItemInPydantic):
@@ -20,8 +18,8 @@ async def get_rate():
 
 register_tortoise(
     app,
-    db_url='sqlite://sql_app.db',
-	models={'models':['models']},
-	generate_schemas=True,
-	add_exception_handlers=True,
+    db_url="sqlite://sql_app.db",
+    modules={"models": ["models"]},
+    generate_schemas=True,
+
 )
