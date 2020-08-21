@@ -1,9 +1,9 @@
 from typing import List
-from fastapi import FastApi
+from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from .models import Item, ItemPydantic, ItemInPydantic
 
-app = FastApi()
+app = FastAPI()
 
 
 
