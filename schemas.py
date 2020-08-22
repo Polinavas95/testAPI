@@ -1,15 +1,15 @@
-from datetime import date
-from typing import List
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
-class Rate(BaseModel):
-    cargo_type: str
+class ItemRequestModel(BaseModel):
     rate: float
+    cargo_type: str
 
-class Date_item(BaseModel):
-    date: date
-    rows: List[Rate]
+
+class Date_Item(BaseModel):
+    date: datetime
 
 
 class Status(BaseModel):
