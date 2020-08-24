@@ -1,7 +1,8 @@
+
 from typing import List, Dict
 from fastapi import FastAPI, HTTPException
 from tortoise.contrib.fastapi import register_tortoise, HTTPNotFoundError
-from models import Item, ItemPydantic, ItemInPydantic
+from models import Item, ItemPydantic, ItemInPydantic, DatePydantic
 from schemas import Date_Item, ItemRequestModel, Status
 from datetime import datetime
 
@@ -16,9 +17,15 @@ async def create_rate(item: ItemInPydantic):
 
 
 
-@app.get('/items', response_model=List[ItemPydantic])
+@app.get('/items')
 async def get_rate():
-	return await ItemPydantic.from_queryset(Item.all())
+    qs = Item.all()
+    dates = await DatePydantic.from_queryset(qs.only('date',))
+    resp_dict = {}
+    for date in dates:
+        q = await ItemPydantic.from_queryset(qs.filter(date=date.date))
+        resp_dict[date.date] = q
+    return resp_dict
 
 
 

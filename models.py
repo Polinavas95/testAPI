@@ -2,7 +2,6 @@ from tortoise import models, fields
 from tortoise.contrib.pydantic import pydantic_model_creator
 
 
-
 class Item(models.Model):
 	"""A model of items
 	"""
@@ -19,5 +18,6 @@ class Item(models.Model):
 
 
 #Pydantic schemas
-ItemPydantic = pydantic_model_creator(Item, name='Items')
+ItemPydantic = pydantic_model_creator(Item, name='Items', exclude=('id', 'date'))
 ItemInPydantic = pydantic_model_creator(Item, name='ItemsIn', exclude_readonly=True)
+DatePydantic = pydantic_model_creator(Item, name='Date', include=('date',))
